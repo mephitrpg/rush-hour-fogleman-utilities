@@ -15,8 +15,8 @@ do
 	touch ../$1/solution_$num.txt
 	go run cmd/solve/main.go $hash > ../$1/solution_$num.txt
 
-	rm -f ../$1/image_$num.png
-	go run cmd/render/main.go $hash ../$1/image_$num.png
+	#rm -f ../$1/image_$num.png
+	#go run cmd/render/main.go $hash ../$1/image_$num.png
 done
 cd ..
 node generate-issues-data $1
