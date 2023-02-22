@@ -22,3 +22,8 @@ do
 	#go run cmd/render/main.go $hash $1/image_$num.png
 done
 node generate-issues-data $1
+echo ""
+echo "View print preview in browser:"
+echo ""
+echo "file://$(cd -P -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P)/web/generated-issues-viewer.html?folder=../$1";
+echo ""
