@@ -40,7 +40,7 @@ function generate() {
         /// number
         const issueNumberEl = document.createElement('div');
         issueNumberEl.classList.add('issue-number');
-        issueNumberEl.innerHTML = i + 1;
+        issueNumberEl.innerHTML = issue.num;
         issueCardEl.appendChild(issueNumberEl);
         ///
         issueCards.push(issueCardEl);
