@@ -15,7 +15,7 @@ URL Example: ``file:///C:/Users/john/Documents/rush-hour-fogleman-utilities/web/
 
 ## Requirements
 
-The script requires nodejs (it will execute ``generate-issues-data.js``).
+The script requires the GO language and nodejs are installed.
 
 ## Execution
 
