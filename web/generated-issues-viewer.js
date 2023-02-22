@@ -1,5 +1,6 @@
 const urlParams = new URLSearchParams(location.search);
-const folder = urlParams.get('folder');
+let folder = urlParams.get('folder');
+if (folder[folder.length-1] === "/") folder = folder.slice(0, -1);
 
 function init() {
     const scriptEl = document.createElement('script');
