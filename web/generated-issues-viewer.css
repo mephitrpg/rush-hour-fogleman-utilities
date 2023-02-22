@@ -68,14 +68,20 @@ body {
     border: 0;
 }
 .issue-name {
-    width: calc(63.5mm - 2 * 7mm);
-    display: block;
-    margin: 0 7mm;
+    flex-shrink: 1;
+    padding: 2mm 7mm;
     text-align: center;
     border: 0;
+    font-size: 8pt;
+    font-weight: bold;
 }
 .issue-number {
+    flex-grow: 1;
     text-align: center;
+    font-size: 16pt;
+    font-weight: bold;
+    color: #CC3333;
+    padding-top: 2mm;
 }
 .issue-name-input:hover {
     border-bottom: 1px solid gray;

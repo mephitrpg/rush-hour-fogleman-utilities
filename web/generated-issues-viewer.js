@@ -1,5 +1,7 @@
 const urlParams = new URLSearchParams(location.search);
 let folder = urlParams.get('folder');
+let nameColor = urlParams.get('nameColor');
+let nameBackgroundColor = urlParams.get('nameBackgroundColor');
 if (folder[folder.length-1] === "/") folder = folder.slice(0, -1);
 
 function init() {
@@ -32,16 +34,18 @@ function generate() {
         issuePictureIframe.scrolling = 'no';
         issuePictureEl.appendChild(issuePictureIframe);
         issueCardEl.appendChild(issuePictureEl);
-        /// name
-        const issueInputEl = document.createElement('input');
-        issueInputEl.classList.add('issue-name');
-        issueInputEl.value = folder.split('/').slice(-1)[0];
-        issueCardEl.appendChild(issueInputEl);
         /// number
         const issueNumberEl = document.createElement('div');
         issueNumberEl.classList.add('issue-number');
         issueNumberEl.innerHTML = issue.num;
         issueCardEl.appendChild(issueNumberEl);
+        /// name
+        const issueInputEl = document.createElement('div');
+        issueInputEl.classList.add('issue-name');
+        issueInputEl.innerHTML = folder.split('/').slice(-1)[0];
+        issueInputEl.style.color = nameBackgroundColor || '#ffffff';
+        issueInputEl.style.backgroundColor = nameColor || '#00dd00';
+        issueCardEl.appendChild(issueInputEl);
         ///
         issueCards.push(issueCardEl);
         ///
