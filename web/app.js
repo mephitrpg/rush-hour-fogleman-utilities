@@ -4,10 +4,11 @@ var UnusableHeight = 72 + 24 * 3;
 
 // Piece
 
-function Piece(position, size, stride) {
+function Piece(position, size, stride, label) {
     this.position = position;
     this.size = size;
     this.stride = stride;
+    this.label = label;
     this.fixed = size === 1;
 }
 
@@ -34,6 +35,11 @@ Piece.prototype.draw = function(p5, boardSize, offset) {
         y += offset;
     }
     p5.rect(x, y, w, h, 0.1);
+    if (this.label) {
+        p5.textSize(32);
+        p5.text('word', 10, 30);
+        p5.fill(0, 102, 153);
+    }
 }
 
 Piece.prototype.pickAxis = function(point) {
@@ -53,7 +59,7 @@ function Move(piece, steps) {
 
 // Board
 
-function Board(desc) {
+function Board(desc, showLabels) {
     this.pieces = [];
 
     // determine board size
@@ -102,7 +108,7 @@ function Board(desc) {
                 throw "invalid piece shape";
             }
         }
-        var piece = new Piece(ps[0], ps.length, stride);
+        var piece = new Piece(ps[0], ps.length, stride, showLabels ? label : '');
         this.addPiece(piece);
     }
 
@@ -110,7 +116,7 @@ function Board(desc) {
     if (positions.has('x')) {
         var ps = positions.get('x');
         for (var p of ps) {
-            var piece = new Piece(p, 1, 1);
+            var piece = new Piece(p, 1, 1, showLabels ? label : '');
             this.addPiece(piece);
         }
     }
@@ -396,7 +402,7 @@ View.prototype.windowResized = function() {
     p5.resizeCanvas(p5.windowWidth, p5.windowHeight - UnusableHeight);
 };
 
-View.prototype.draw = function() {
+View.prototype.draw = function(showLabels) {
     var p5 = this.p5;
     var board = this.board;
     var size = board.size;
@@ -493,13 +499,13 @@ View.prototype.draw = function() {
             p5.fill(this.pieceColor);
         }
         p5.stroke(this.pieceOutlineColor);
-        piece.draw(p5, size, offset);
+        piece.draw(p5, size, offset, showLabels);
     }
 };
 
 //
 
-function randomBoard() {
+function randomBoard(data) {
     $.getJSON("https://www.michaelfogleman.com/rushserver/random.json", function(data) {
         location.hash = data.desc + "/" + data.moves;
     });

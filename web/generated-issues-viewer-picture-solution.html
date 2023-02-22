@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+    <div id="view"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.1/p5.min.js"></script>
+    <script src="app.js?bust=3"></script>
+    <script src="common-functions.js"></script>
+    <style>
+        body {
+            margin: 0;
+        }
+        .letter {
+            position: absolute;
+            font-family: Arial, Helvetica, sans-serif;
+            color: white;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+    <script>
+        const hash = location.hash.substr(1);
+        const hashRH = convertToRushSyntax(hash);
+        const carsCache = {};
+        const boardSize = 6;
+
+        function getCarSize(letter, x, y) {
+            let check;
+            let i = 0;
+            if (isCarHorizontal(hashRH, letter)) {
+                do {
+                    check = hashRH[y * boardSize + (x + i)] === letter;
+                    if (check) i++;
+                } while (check);
+            } else {
+                do {
+                    check = hashRH[(y + i) * boardSize + x] === letter;
+                    if (check) i++;
+                } while (check);
+            }
+            return i;
+        }
+
+
+        $(()=>{
+            const canvasSize = $('canvas').height();
+            const canvasTop = 0;
+            const canvasLeft = ($('body').width() - canvasSize )/ 2;
+            const cellSize = canvasSize / 6;
+            const letterSize = cellSize * 0.5;
+
+            Array.from(hashRH).forEach((letter, i) => {
+                const isSpace = letter === '.' || letter === 'o';
+                if (isSpace) return;
+                const isNew = !carsCache[letter];
+                if (!isNew) return;
+                const y = Math.floor(i / boardSize);
+                const x = i - y * boardSize;
+                const carCache = carsCache[letter] = {x, y, size: getCarSize(letter, x, y), horizontal: isCarHorizontal(hashRH, letter)};
+                const w = cellSize * ( carCache.horizontal ? carCache.size : 1 );
+                const h = cellSize * ( carCache.horizontal ? 1 : carCache.size );
+                const t = canvasTop + y * cellSize;
+                const l =  canvasLeft + x * cellSize;
+                $('body').append(`<div class="letter" style="font-size: ${letterSize}px; width: ${w}px; height: ${h}px; top: ${t}px; left: ${l}px;"><div>${letter}</div></div>`)
+            });
+        });
+    </script>
+</body>
+</html>

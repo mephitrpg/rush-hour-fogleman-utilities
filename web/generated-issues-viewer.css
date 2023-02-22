@@ -1,0 +1,127 @@
+html {
+    
+}
+body {
+    margin: 0;
+    font-family: arial;
+}
+#issuesfilenotfound {
+    padding: 10px;
+    color: white;
+    background-color: red;
+}
+.hide {
+    display: none;
+}
+.page {
+    /* PA4 paper format */
+    box-sizing: border-box;
+    padding: 10mm;
+    width: 280mm;
+    height: 210mm;
+    page-break-after: always
+}
+.card,
+.card-empty {
+    float: left;
+    width: 63.5mm;
+    height: 88mm;
+    margin-bottom: 10mm;
+}
+.card {
+    border: 1px solid silver;
+}
+.card-issue {
+    display: flex;
+    flex-direction: column;
+}
+.card-solution {
+    transform: rotate(180deg);
+}
+.card-issue::before {
+    position: absolute;
+    display: block;
+    content: ' ';
+    width: 63.5mm;
+    height: calc(88mm + 5mm);
+    border-bottom: 1px dashed silver;
+}
+.card-empty {
+    border: 1px solid transparent;
+}
+.card-empty::before {
+    border: 0;
+}
+.issue-picture {
+    box-sizing: border-box;
+    padding-top: 7mm;
+    width: 63.5mm;
+    height: calc(50mm + 2 * 7mm);
+    margin: 0 auto;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+.issue-picture-iframe {
+    width: 63.5mm;
+    height: 88mm;
+    margin: 0 auto;
+    border: 0;
+}
+.issue-name {
+    width: calc(63.5mm - 2 * 7mm);
+    display: block;
+    margin: 0 7mm;
+    text-align: center;
+    border: 0;
+}
+.issue-number {
+    text-align: center;
+}
+.issue-name-input:hover {
+    border-bottom: 1px solid gray;
+}
+.solution-picture {
+    margin-top: 4mm;
+    float: left;
+    box-sizing: border-box;
+    width: 40mm;
+    height: 32mm;
+    overflow: hidden;
+}
+.solution-picture-iframe {
+    width: 40mm;
+    height: 70mm;
+    margin: 0 auto;
+    border: 0;
+}
+.solution {
+    margin-left: 4mm;
+    box-sizing: border-box;
+    padding-top: 3mm;
+    font-size: 8pt;
+    font-weight: bold;
+    letter-spacing: 0.2em;
+}
+.solution-cell {
+    float: left;
+    border-bottom: 1px solid #CC3333;
+    width: calc((63.5mm - 2 * 4mm + 4 * 1mm) / 5);
+    /* width: 12.06mm; */
+}
+.solution-cell:nth-child(-2n+16),
+.solution-cell:nth-child(5n+21),
+.solution-cell:last-child {
+    width: calc((63.5mm - 2 * 4mm - 4 * 1.2em) / 5);
+    color: #010101;
+    /* width: 10.14mm; */
+}
+
+.solution-cell-noborder {
+    border-bottom: 0;
+}
+
+/* .solution-row {
+    justify-content: space-between;
+    border-bottom: 1px solid #CC3333;
+    margin-bottom: 0.2rem;
+} */
