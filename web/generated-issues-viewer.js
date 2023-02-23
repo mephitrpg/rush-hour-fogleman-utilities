@@ -1,5 +1,6 @@
 const urlParams = new URLSearchParams(location.search);
 let folder = urlParams.get('folder');
+let name = urlParams.get('name');
 let nameColor = urlParams.get('nameColor');
 let nameBackgroundColor = urlParams.get('nameBackgroundColor');
 if (folder[folder.length-1] === "/") folder = folder.slice(0, -1);
