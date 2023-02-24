@@ -4,11 +4,10 @@ var UnusableHeight = 72 + 24 * 3;
 
 // Piece
 
-function Piece(position, size, stride, label) {
+function Piece(position, size, stride) {
     this.position = position;
     this.size = size;
     this.stride = stride;
-    this.label = label;
     this.fixed = size === 1;
 }
 
@@ -35,11 +34,6 @@ Piece.prototype.draw = function(p5, boardSize, offset) {
         y += offset;
     }
     p5.rect(x, y, w, h, 0.1);
-    if (this.label) {
-        p5.textSize(32);
-        p5.text('word', 10, 30);
-        p5.fill(0, 102, 153);
-    }
 }
 
 Piece.prototype.pickAxis = function(point) {
@@ -59,7 +53,7 @@ function Move(piece, steps) {
 
 // Board
 
-function Board(desc, showLabels) {
+function Board(desc) {
     this.pieces = [];
 
     // determine board size
@@ -108,7 +102,7 @@ function Board(desc, showLabels) {
                 throw "invalid piece shape";
             }
         }
-        var piece = new Piece(ps[0], ps.length, stride, showLabels ? label : '');
+        var piece = new Piece(ps[0], ps.length, stride);
         this.addPiece(piece);
     }
 
@@ -116,7 +110,7 @@ function Board(desc, showLabels) {
     if (positions.has('x')) {
         var ps = positions.get('x');
         for (var p of ps) {
-            var piece = new Piece(p, 1, 1, showLabels ? label : '');
+            var piece = new Piece(p, 1, 1);
             this.addPiece(piece);
         }
     }
@@ -402,7 +396,7 @@ View.prototype.windowResized = function() {
     p5.resizeCanvas(p5.windowWidth, p5.windowHeight - UnusableHeight);
 };
 
-View.prototype.draw = function(showLabels) {
+View.prototype.draw = function() {
     var p5 = this.p5;
     var board = this.board;
     var size = board.size;
@@ -499,7 +493,7 @@ View.prototype.draw = function(showLabels) {
             p5.fill(this.pieceColor);
         }
         p5.stroke(this.pieceOutlineColor);
-        piece.draw(p5, size, offset, showLabels);
+        piece.draw(p5, size, offset);
     }
 };
 
