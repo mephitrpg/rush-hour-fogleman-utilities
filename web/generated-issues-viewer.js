@@ -136,6 +136,8 @@ function generate() {
 function changeUrlParam(paramName) {
     const params = new URLSearchParams(location.search);
     if (paramName === 'resetter') {
+        const sure = confirm('Reset params to default value?');
+        if (!sure) return;
         params.set('name', defaultName());
         params.set('nameColor', defaultNameColor());
         params.set('nameBgColor', defaultNameBgColor());
