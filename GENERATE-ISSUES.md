@@ -6,9 +6,18 @@ The script reads a given folder containing multiple text files named ``hash_<car
 
 In this repository you can find the ``data/michael-fogleman-top-23`` folder containing Michael Fogleman's "Top 23" hashes, but you can create your own folder and use the editor in ``web/index.html`` to create your own hashes, as well as the hash of already existing issues.
 
-A view of printable cards with solution on the back (max 66 moves) is available. To see it, in your browser open the local file ``web/generated-issues-viewer.html`` adding the parameter ``?folder=<folderPath>`` to the URL.
+A view of printable cards with solution on the back is available. To see it, in your browser open the local file ``web/generated-issues-viewer.html`` adding the following parameters to the URL ``?folder=<folderPath>`` to the URL.
 
-URL Example: ``file:///C:/Users/john/Documents/rush-hour-fogleman-utilities/web/index.html?folder=../data/michael-fogleman-top-23&nameColor=#ffffff&nameBackgroundColor=#ff0000&name=Top23``
+- folder (required) = The path of the folder containing the hashes, starting from the folder which contains the viewer, usually the "web" folder of this repository.
+- nameColor (optional) = The color of the name. Default value: white (#ffffff).
+- nameBgColor (optional) = The background color of name. Default value: green (#00dd00).
+- name (optional) = The name of the series of cards. Defaylt value: the folder's name.
+
+Note: parameters should be [url encoded](https://www.w3schools.com/jsref/jsref_encodeuricomponent.asp).
+
+URL Example:
+
+``file:///C:/Users/john/Documents/rush-hour-fogleman-utilities/web/index.html?folder=../data/michael-fogleman-top-23
 
 ## Requirements
 
