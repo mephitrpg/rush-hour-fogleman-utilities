@@ -9,11 +9,9 @@ In this repository you can find the ``data/michael-fogleman-top-23`` folder cont
 A view of printable cards with solution on the back is available. To see it, in your browser open the local file ``web/generated-issues-viewer.html`` adding the following parameters to the URL ``?folder=<folderPath>`` to the URL.
 
 - folder (required) = The path of the folder containing the hashes, starting from the folder which contains the viewer, usually the "web" folder of this repository.
-- nameColor (optional) = The color of the name. Default value: white (#ffffff).
-- nameBgColor (optional) = The background color of name. Default value: green (#00dd00).
-- name (optional) = The name of the series of cards. Defaylt value: the folder's name.
-
-Note: parameters should be [url encoded](https://www.w3schools.com/jsref/jsref_encodeuricomponent.asp).
+- nameColor (optional) = The color of the name.
+- nameBgColor (optional) = The background color of name.
+- name (optional) = The name of the series of cards.
 
 URL Example:
 
