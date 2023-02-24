@@ -55,6 +55,7 @@
             const letterSize = cellSize * 0.5;
 
             Array.from(hashRH).forEach((letter, i) => {
+                if (letter === 'x') return;
                 const isSpace = letter === '.' || letter === 'o';
                 if (isSpace) return;
                 const isNew = !carsCache[letter];
