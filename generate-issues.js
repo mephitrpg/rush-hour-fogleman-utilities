@@ -3,7 +3,8 @@ const path = require('path');
 const fs = require('fs');
 const { exec } = require('child_process');
 
-const dir = process.argv[2] || '';
+let dir = process.argv[2]?.replace(/\\/g, '/') || '';
+if (dir[dir.length-1] === "/") dir = dir.slice(0, -1);
 const directoryPath = path.join(__dirname, dir);
 
 function getIndex(fileName) {
@@ -11,7 +12,7 @@ function getIndex(fileName) {
     return num - 1;
 }
 
-const issues = [];
+let issues = [];
 let fileNames = [];
 let fileNamesLen = 0;
 let fileNamesCheck = 0;
@@ -48,12 +49,15 @@ function checkEnd () {
     fileNamesCheck++;
     // console.log("Solution",fileNamesCheck,'/',fileNamesLen)
     if (fileNamesCheck !== fileNamesLen) return;
+    issues = issues.sort((issue1, issue2) => issue1.num - issue2.num);
     const filePath = path.join(directoryPath, 'data.js');
     const content = 'const issues = ' + JSON.stringify(issues);
+    let urlToOpen = `file://${__dirname}/web/generated-issues-viewer.html?folder=${encodeURIComponent('../' + dir)}`.replace(/\\/g, '/');
+    if (urlToOpen.slice(0, 8) !== 'file:///') urlToOpen = `file:///${urlToOpen.slice(7)}`;
     console.log(``);
     console.log(`View print preview in browser:`);
     console.log(``);
-    console.log(`file://${__dirname}/web/generated-issues-viewer.html?folder=../${dir}`);
+    console.log(urlToOpen);
     console.log(``);    
     fs.writeFile(filePath, content, 'utf8', ()=>{});
 }
