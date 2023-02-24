@@ -5,6 +5,26 @@ body {
     margin: 0;
     font-family: arial;
 }
+@media screen {
+    body {
+        background-color: silver;
+    }
+    .page {
+        border: 1px solid silver;
+        background-color: white;
+        margin: 5mm;
+    }
+    .buttons {
+        position: fixed;
+        top: 0;
+        z-index: 1;
+    }
+}
+@media print {
+    .buttons {
+        display: none;
+    }
+}
 #issuesfilenotfound {
     padding: 10px;
     color: white;
@@ -19,7 +39,10 @@ body {
     padding: 10mm;
     width: 280mm;
     height: 210mm;
-    page-break-after: always
+    page-break-after: always;
+}
+.page-rotate {
+    transform: rotate(180deg);
 }
 .card,
 .card-empty {
@@ -104,7 +127,8 @@ body {
     margin-left: 4mm;
     box-sizing: border-box;
     padding-top: 3mm;
-    font-size: 8pt;
+    font-size: 3mm;
+    line-height: 1.42em;
     font-weight: bold;
     letter-spacing: 0.2em;
 }

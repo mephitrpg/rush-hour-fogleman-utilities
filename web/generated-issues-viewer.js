@@ -1,8 +1,25 @@
+function defaultName() {
+    const urlParams = new URLSearchParams(location.search);
+    const folder = urlParams.get('folder') || '';
+    return folder.split('/').slice(-1)[0].replace(/[-_]/g, ' ').toUpperCase();
+}
+function defaultNameColor() {
+    return '#ffffff';
+}
+function defaultNameBgColor() {
+    return '#666666';
+}
+function defaultRotate() {
+    return '0';
+}
+
 const urlParams = new URLSearchParams(location.search);
 let folder = urlParams.get('folder');
-let name = urlParams.get('name');
-let nameColor = urlParams.get('nameColor');
-let nameBackgroundColor = urlParams.get('nameBackgroundColor');
+let name = urlParams.get('name') || defaultName();
+let nameColor = urlParams.get('nameColor') || defaultNameColor();
+let nameBgColor = urlParams.get('nameBgColor') || defaultNameBgColor();
+let rotate = urlParams.get('rotate') || defaultRotate();
+
 if (folder[folder.length-1] === "/") folder = folder.slice(0, -1);
 
 function init() {
@@ -41,12 +58,12 @@ function generate() {
         issueNumberEl.innerHTML = issue.num;
         issueCardEl.appendChild(issueNumberEl);
         /// name
-        const issueInputEl = document.createElement('div');
-        issueInputEl.classList.add('issue-name');
-        issueInputEl.innerHTML = folder.split('/').slice(-1)[0];
-        issueInputEl.style.color = nameBackgroundColor || '#ffffff';
-        issueInputEl.style.backgroundColor = nameColor || '#00dd00';
-        issueCardEl.appendChild(issueInputEl);
+        const issueNameEl = document.createElement('div');
+        issueNameEl.classList.add('issue-name');
+        issueNameEl.innerHTML = name;
+        issueNameEl.style.color = nameColor;
+        issueNameEl.style.backgroundColor = nameBgColor;
+        issueCardEl.appendChild(issueNameEl);
         ///
         issueCards.push(issueCardEl);
         ///
@@ -70,13 +87,6 @@ function generate() {
         if (solution) {
             const splittedSolution = parseSolution(convertToRushSyntax(solution)).split(' ');
             solutionEl.innerHTML += splittedSolution.map(cell => `<div class="solution-cell">${cell}</div>`).join('');
-            if (splittedSolution.length >  16 + 45) {
-                const cells = solutionEl.querySelectorAll('.solution-cell');
-                for (let i = 16 + 45; i < cells.length; i++){
-                    const cell = cells[i];
-                    cell.classList.add('solution-cell-noborder');
-                }
-            }
         } else {
             solutionEl.innerHTML = `<div style="color: red">${parseSolution(issue.solution)}</div>`;
         }
@@ -93,10 +103,11 @@ function generate() {
         if (!(i % frontBackCardsPerPage)) {
             pageEl = document.createElement('div');
             pageEl.classList.add('page');
+            if (rotate === '180') pageEl.classList.add('page-rotate');
             pageEl.setAttribute('data-page-number', pageNumber);
             appEl.appendChild(pageEl);
         }
-        
+
         for (let j = 0; j < frontBackCardsPerPage; j++) {
             let issueCardEl = issueCards[i+j];
             if (!issueCardEl) {
@@ -118,8 +129,68 @@ function generate() {
             }
             pageEl.appendChild(solutionCardEl);
         }
-
+        
     }
 }
+
+function changeUrlParam(paramName) {
+    const params = new URLSearchParams(location.search);
+    if (paramName === 'resetter') {
+        params.set('name', defaultName());
+        params.set('nameColor', defaultNameColor());
+        params.set('nameBgColor', defaultNameBgColor());
+        params.set('rotate', defaultRotate());
+        location.replace(`${location.pathname}?${params}`);
+        return;
+    }
+    params.set('name', name);
+    params.set('nameColor', nameColor);
+    params.set('nameBgColor', nameBgColor);
+    params.set('rotate', rotate);
+    let data;
+    switch(paramName){
+        case 'name': {
+            data = prompt('Name', name);
+            break;
+        }
+        case 'nameColor': {
+            data = prompt('Name color', nameColor);
+            break;
+        }
+        case 'nameBgColor': {
+            data = prompt('Name background color', nameBgColor);
+            break;
+        }
+        case 'rotate': {
+            data = rotate === '0' ? '180' : '0';
+            break;
+        }
+    }
+    if (data) {
+        params.set(paramName, data);
+        location.replace(`${location.pathname}?${params}`);
+    }
+}
+
+document.querySelector('#rotator').addEventListener('click', ()=>{
+    changeUrlParam('rotate');
+});
+
+document.querySelector('#urlencode').addEventListener('click', ()=>{
+    changeUrlParam('name');
+});
+
+document.querySelector('#namecolor').addEventListener('click', ()=>{
+    changeUrlParam('nameColor');
+});
+
+document.querySelector('#namebgcolor').addEventListener('click', ()=>{
+    changeUrlParam('nameBgColor');
+});
+
+document.querySelector('#resetter').addEventListener('click', ()=>{
+    changeUrlParam('resetter');
+});
+
 
 init();
