@@ -19,6 +19,9 @@ body {
         top: 0;
         z-index: 1;
     }
+    .page-rotate {
+        transform: rotate(180deg);
+    }    
 }
 @media print {
     .buttons {
@@ -37,12 +40,9 @@ body {
     /* PA4 paper format */
     box-sizing: border-box;
     padding: 10mm;
-    width: 280mm;
-    height: 210mm;
+    width: calc(280mm - 0.5mm);
+    height: calc(210mm - 0.5mm);
     page-break-after: always;
-}
-.page-rotate {
-    transform: rotate(180deg);
 }
 .card,
 .card-empty {
