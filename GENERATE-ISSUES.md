@@ -26,3 +26,7 @@ The script requires the GO language and nodejs are installed.
 From terminal, run the following command.
 
 ````node generate-issues.js <folderPath>````
+
+## Warning
+
+Before print, double check the print preview. If something is weyrd (letters are not over pieces, solution is missing, etc) try colsing and reopening the print preview, or check again that ashes are correct, then run the script again.
