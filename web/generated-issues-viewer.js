@@ -88,7 +88,7 @@ function generate() {
             const splittedSolution = parseSolution(convertToRushSyntax(solution)).split(' ');
             solutionEl.innerHTML += splittedSolution.map(cell => `<div class="solution-cell">${cell}</div>`).join('');
         } else {
-            solutionEl.innerHTML = `<div style="color: red">${parseSolution(issue.solution)}</div>`;
+            solutionEl.innerHTML = `<div style="color: red">${issue.solution}</div>`;
         }
         ///
         solutionCards.push(solutionCardEl);
