@@ -38,7 +38,7 @@
             <p>
                 <div style="display: flex;">
                     <div>
-                        <textarea id="map-textarea" class="map-textarea" rows="6"></textarea>
+                        <textarea id="map-textarea" class="map-textarea" spellcheck="false"></textarea>
                     </div>
                     <div style="margin-left: 8px;">
                         You can use this editor to render the hash of an already existing problem.<br>
@@ -55,7 +55,7 @@
             <p><fieldset style="background-color: #f0f0f0"><legend>Moves</legend>
                 When you render the map using this editor, the "required moves" amount is only supported if you fill this field.<br>
                 <span style="display: flex; width: 100%; margin-top: 8px;">
-                    <textarea id="solution-textarea" class="solution-textarea" style="flex-grow: 1;" rows="3" placeholder="Insert map's solution generated using the command-line scripts"></textarea>
+                    <textarea id="solution-textarea" class="solution-textarea" style="flex-grow: 1;" rows="3" spellcheck="false" placeholder="Insert map's solution generated using the command-line scripts"></textarea>
                 </span>
                 <span style="display: flex; margin-top: 8px;">
                     <button onClick="onConvertButtonClick();" style="flex-grow: 1;">Convert to Rush Hour</button>

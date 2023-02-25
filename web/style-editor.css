@@ -14,8 +14,9 @@
 
 .map-textarea {
     font-size: 18pt;
-    width: 6rem;
     overflow: hidden;
+    width: 3.3em;
+    height: 7em;
 }
 
 .solution-textarea {
