@@ -1,4 +1,4 @@
-# Issues Solutions and Cards Generator
+# Issue Editor and Cards Generator
 
 This script generates the solutions for given issues.
 
