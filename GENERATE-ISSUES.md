@@ -29,4 +29,4 @@ From terminal, run the following command.
 
 ## Warning
 
-Before print, double check the print preview. If something is weyrd (letters are not over pieces, solution is missing, etc) try colsing and reopening the print preview, or check again that ashes are correct, then run the script again.
+After opening the browser's print window, double check the print preview before printing. If something is weyrd (letters are not over pieces, solution is missing, etc) try colsing and reopening the print preview, or check again that ashes are correct, then run the script again.
