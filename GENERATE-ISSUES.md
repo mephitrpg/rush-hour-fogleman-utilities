@@ -31,7 +31,7 @@ From terminal, run the following command.
 
 After opening the browser's print window, double check the print preview before printing. If something is weyrd (letters are not over pieces, solution is missing, etc) try colsing and reopening the browser's print window, or check again that ashes are correct, then run the script again.
 
-## 3D Print
+## 3D print
 Many versions of 3d printable wall exists. Here are some of them:
 - https://www.printables.com/it/model/269484-rush-hour-puzzle-cone-wall
 - https://www.myminifactory.com/object/3d-print-sail-fast-puzzle-game-6469 (see Remixes)
